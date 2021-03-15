@@ -15,10 +15,10 @@ function Fieldpage(props) {
         );
     });
 
-    const foundField = props.records.find(field=> {
-        return field.id === props.match.params.id;     
-    })
-    
+    // const foundField = props.records.find(field=> {
+    //     return userId === props.userProfile.id;     
+    // })
+
     return(
         <div>
             <h1> Field name</h1>

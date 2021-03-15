@@ -16,12 +16,13 @@ class App extends Component {
       username: '',
       password: '',
       allUsers:[],
+      
     };
   }
 
   componentDidMount = () => {
     this.getRecords();
-    this.getUsers();
+    // this.getUsers();
   };
   getRecords = async () => {
     const response = await axios.get('http://localhost:3001/farmrecord/all');
@@ -55,7 +56,8 @@ class App extends Component {
     };
     console.log("i am running")
     const response = await axios.post('http://localhost:3001/auth/login', data);
-    console.log(response);    
+    console.log(response); 
+          
   };
 
   signup = async (e) => {
@@ -89,9 +91,9 @@ class App extends Component {
 
           <Route exact path="/" render = {() => (
               <Homepage 
-                login={this.state.login}
-                loginOnChange={this.state.loginOnChange}
-                signup={this.state.signup}
+                login={this.login}
+                loginOnChange={this.loginOnChange}
+                signup={this.signup}
                 allUsers={this.state.allUsers}
                 />
           )} 
@@ -106,8 +108,8 @@ class App extends Component {
           )}
           />
 
-          {/* <Fieldpage
-            records={this.state.records}/> */}
+          <Fieldpage
+            records={this.state.records}/>
 
           {/* <div>{records}</div> */}
           
