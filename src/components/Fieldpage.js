@@ -9,22 +9,24 @@ function Fieldpage(props) {
             <h4>{record.fieldName}</h4>          
             <p>
               {record.dateComplete}<br/>
-              {record.details}
+              {record.details}<br/>
+              {record.userId}
             </p>
           </div>
         );
     });
 
-    // const foundField = props.records.find(field=> {
-    //     return userId === props.userProfile.id;     
-    // })
+    const foundField = props.records.filter(field=> {
+        return field.userId === props.userProfile.id;     
+    })
 
     return(
         <div>
+            <h4>fieldpage.js</h4>
             <h1> Field name</h1>
             {/* date, operation, and details of this field*/}
             <div>{records}</div>
-            {/* <div>{foundField}</div> */}
+            <div>{foundField}</div>
         </div>
     )
 }

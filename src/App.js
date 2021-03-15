@@ -13,9 +13,12 @@ class App extends Component {
     this.state = {
       records: [],
       userProfile:{},
+      name:'',
       username: '',
       password: '',
       allUsers:[],
+      loggedIn: false,
+      userId:null,
       
     };
   }
@@ -33,12 +36,23 @@ class App extends Component {
     // console.log(this.state.records);
   };
   getUsers = async () => {
+    console.log("get users")
     const response = await axios.get('http://localhost:3001/user/all');
     console.log(response);
     this.setState({
       allUsers: response.data,
     });
     console.log(this.state.allUsers);
+  };
+
+  getUser = async () => {
+    console.log("get users")
+    const response = await axios.get(`http://localhost:3001/user/profile/${this.state.userId}`);
+    console.log(response);
+    // this.setState({
+    //   userProfile: response.data,
+    // });
+    // console.log(this.state.userProfile);
   };
 
   loginOnChange = (e) => {
@@ -56,20 +70,28 @@ class App extends Component {
     };
     console.log("i am running")
     const response = await axios.post('http://localhost:3001/auth/login', data);
-    console.log(response); 
-          
+    console.log("logged in"); 
+    console.log(response.data)
+    this.setState({
+      userId: response.data.id, 
+      loggedIn:true,
+      userProfile: response.data,
+    })
+    this.getUser();    
   };
 
   signup = async (e) => {
     e.preventDefault();
     console.log("signup")
     const data = {
+      name: this.state.name,
       username: this.state.username,
       password: this.state.password,
     };
     console.log("i am running")
     const response = await axios.post('http://localhost:3001/auth/signup', data);
     console.log(response);    
+    console.log("signed up");
   };
 
 
@@ -87,7 +109,7 @@ class App extends Component {
     // }); 
       return (
         <div className="App">
-          <h3>App.js page</h3> 
+          {/* <h3>App.js page</h3>  */}
 
           <Route exact path="/" render = {() => (
               <Homepage 
@@ -102,14 +124,23 @@ class App extends Component {
 
           <Route path="/fieldpage" render = {(routerProps) => (
               <Fieldpage
-                records={this.state.records} 
+                records={this.state.records}
+                userProfile={this.state.userProfile} 
                 {...routerProps} 
                 />
-          )}
+          )} 
           />
 
-          <Fieldpage
-            records={this.state.records}/>
+          {/* <Route path="/userpage" render = {(routerProps) => (
+              <Userpage
+                records={this.state.records}
+                userProfile={this.state.userProfile} 
+                {...routerProps} 
+                />
+          )} */}
+
+          {/* <Fieldpage
+            records={this.state.records}/> */}
 
           {/* <div>{records}</div> */}
           

@@ -36,7 +36,7 @@ function Homepage(props) {
                 />
                 <input type='submit' value='Login' />
             </form><br/>
-
+                <h2>OR</h2>
             {/* user sign up */}
             <br/>
             <form onSubmit={props.signup}>
@@ -44,7 +44,7 @@ function Homepage(props) {
                     name='name'
                     type='text'
                     placeholder='name'
-                    value={props.username}
+                    value={props.name}
                     onChange={props.loginOnChange}
                 />
                 <input
