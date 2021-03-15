@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import Homepage from './components/Homepage';
 import { Route, Link, Redirect } from 'react-router-dom';
+import Fieldpage from './components/Fieldpage';
+import Userpage from './components/Userpage';
 
 
 class App extends Component {
@@ -13,12 +15,13 @@ class App extends Component {
       userProfile:{},
       username: '',
       password: '',
+      allUsers:[],
     };
   }
 
   componentDidMount = () => {
     this.getRecords();
-    // this.getUser();
+    this.getUsers();
   };
   getRecords = async () => {
     const response = await axios.get('http://localhost:3001/farmrecord/all');
@@ -28,14 +31,14 @@ class App extends Component {
     });
     // console.log(this.state.records);
   };
-  // getUser = async () => {
-  //   const response = await axios.get('http://localhost:3001/user/profile/1');
-  //   console.log(response);
-  //   this.setState({
-  //     userProfile: response.data,
-  //   });
-  //   console.log(this.state.userProfile);
-  // };
+  getUsers = async () => {
+    const response = await axios.get('http://localhost:3001/user/all');
+    console.log(response);
+    this.setState({
+      allUsers: response.data,
+    });
+    console.log(this.state.allUsers);
+  };
 
   loginOnChange = (e) => {
     e.preventDefault();
@@ -52,24 +55,34 @@ class App extends Component {
     };
     console.log("i am running")
     const response = await axios.post('http://localhost:3001/auth/login', data);
-    console.log(response);
-    this.setState({
-      userProfile: response.data,
-    });
+    console.log(response);    
   };
 
+  signup = async (e) => {
+    e.preventDefault();
+    console.log("signup")
+    const data = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    console.log("i am running")
+    const response = await axios.post('http://localhost:3001/auth/signup', data);
+    console.log(response);    
+  };
+
+
   render () {  
-    const records = this.state.records.map((record) => {
-      return (
-        <div>
-          <h4>{record.fieldName}</h4>          
-          <p>
-            {record.dateComplete}<br/>
-            {record.details}
-          </p>
-        </div>
-      );
-    }); 
+    // const records = this.state.records.map((record) => {
+    //   return (
+    //     <div>
+    //       <h4>{record.fieldName}</h4>          
+    //       <p>
+    //         {record.dateComplete}<br/>
+    //         {record.details}
+    //       </p>
+    //     </div>
+    //   );
+    // }); 
       return (
         <div className="App">
           <h3>App.js page</h3> 
@@ -77,13 +90,26 @@ class App extends Component {
           <Route exact path="/" render = {() => (
               <Homepage 
                 login={this.state.login}
-                loginOnChange={this.state.loginOnChange}/>
+                loginOnChange={this.state.loginOnChange}
+                signup={this.state.signup}
+                allUsers={this.state.allUsers}
+                />
           )} 
           />
           
-          
 
-          <div>{records}</div>
+          <Route path="/fieldpage" render = {(routerProps) => (
+              <Fieldpage
+                records={this.state.records} 
+                {...routerProps} 
+                />
+          )}
+          />
+
+          {/* <Fieldpage
+            records={this.state.records}/> */}
+
+          {/* <div>{records}</div> */}
           
 
         </div>

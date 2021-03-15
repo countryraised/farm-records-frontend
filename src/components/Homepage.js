@@ -1,6 +1,20 @@
 import React from 'react';
 
 function Homepage(props) {
+
+    const userProfile = props.allUsers.map((user) => {
+        return (
+          <div key={user.id}>
+            <h4>{user.name}</h4>          
+            <p>
+              {user.username}<br/>
+              {user.password}
+            </p>
+          </div>
+        );
+    });
+
+
     return(
         <div>
             <h1>Farm Records App</h1>
@@ -21,11 +35,36 @@ function Homepage(props) {
                     onChange={props.loginOnChange}
                 />
                 <input type='submit' value='Login' />
-            </form>
+            </form><br/>
 
             {/* user sign up */}
+            <br/>
+            <form onSubmit={props.signup}>
+                <input
+                    name='name'
+                    type='text'
+                    placeholder='name'
+                    value={props.username}
+                    onChange={props.loginOnChange}
+                />
+                <input
+                    name='username'
+                    type='text'
+                    placeholder='username'
+                    value={props.username}
+                    onChange={props.loginOnChange}
+                />
+                <input
+                    name='password'
+                    type='password'
+                    placeholder='password'
+                    value={props.password}
+                    onChange={props.loginOnChange}
+                />
+                <input type='submit' value='SignUp' />
+            </form>
 
-
+            <div>{userProfile}</div> 
         </div>
     )
 }
