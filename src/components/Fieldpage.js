@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Route, Link, Redirect } from 'react-router-dom';
 
 
 function Fieldpage(props) {
@@ -16,17 +16,24 @@ function Fieldpage(props) {
         );
     });
 
-    const foundField = props.records.filter(field=> {
-        return field.userId === props.userProfile.id;     
-    })
+    const foundField = (props.records.find(field=> {
+        return field.userId == props.userId
+        })
+    );   
+    console.log(props.userId) //integer
+    console.log(foundField) //array of objects.
+    
 
     return(
         <div>
             <h4>fieldpage.js</h4>
             <h1> Field name</h1>
             {/* date, operation, and details of this field*/}
-            <div>{records}</div>
-            <div>{foundField}</div>
+            {/* <div>{records}</div> */}
+            <p>split</p>
+            <div>{foundField.fieldName}</div>
+
+             
         </div>
     )
 }
