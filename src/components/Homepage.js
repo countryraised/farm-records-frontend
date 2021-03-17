@@ -1,21 +1,9 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
 
+
 function Homepage(props) {
-
-    // const userProfile = props.allUsers.map((user) => {
-    //     return (
-    //       <div key={user.id}>
-    //         <h4>{user.name}</h4>          
-    //         <p>
-    //           {user.username}<br/>
-    //           {user.password}
-    //         </p>
-    //       </div>
-    //     );
-    // });
-
-
+    
     return(
         <div>
             <h1>Farm Records App</h1>
@@ -37,6 +25,7 @@ function Homepage(props) {
                     onChange={props.loginOnChange}
                 />
                 <input type='submit' value='Login' />
+                {/* <Link to={`/userpage`} ><input type='submit' value='Login' /></Link> */}
             </form><br/>
                 <h4>OR</h4>
             {/* user sign up */}
@@ -65,9 +54,9 @@ function Homepage(props) {
                     onChange={props.loginOnChange}
                 />
                 <input type='submit' value='SignUp' />
-            </form>
-
-            {/* <div>{userProfile}</div>  */}
+                {/* <Link to={`/useerpage`} ><input type='submit' value='SignUp' /></Link> */}
+            </form><br/><br/>
+            
         </div>
     )
 }

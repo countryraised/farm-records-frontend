@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Homepage from './components/Homepage';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import Fieldpage from './components/Fieldpage';
 import Userpage from './components/Userpage';
 
@@ -82,14 +82,17 @@ class App extends Component {
       userProfile: response.data,
     })
     console.log(this.state.userId)
-    console.log(this.state.userProfile)
-    this.getUser();    
+    console.log(this.state.userProfile) 
+    this.props.history.push("/userpage")   
+    // this.getUser();  
+    console.log("userpage")  
+    // this.props.history.push("/userpage")
   };
 
   signup = async (e) => {
     e.preventDefault();
     console.log("signup")
-    const data = {
+    const data = {       
       name: this.state.name,
       username: this.state.username,
       password: this.state.password,
@@ -98,6 +101,14 @@ class App extends Component {
     const response = await axios.post('http://localhost:3001/user/signup', data);
     console.log(response);    
     console.log("signed up");
+    this.setState({
+      userId: response.data.id, 
+      loggedIn:true,
+      userProfile: response.data,
+    })
+    this.props.history.push("/userpage")
+    console.log("userpage")
+    // this.getUser();
   };
 
   createField = async (e) => {
@@ -115,6 +126,24 @@ class App extends Component {
     console.log("field added");
   }
 
+  logout =(e)=>{
+    e.preventDefault();
+    this.setState({
+      userProfile:{},
+      name:'',
+      username: '',
+      password: '',
+      allUsers:[],
+      loggedIn: false,
+      userId:null,
+      fieldName:'',
+      dateComplete:'',
+      operationType:'',
+      details:'',
+    })
+    this.props.history.push("/")
+  }
+
 
   render () {  
     
@@ -124,10 +153,12 @@ class App extends Component {
             <Link to={`/`}><div>Home</div></Link>
             <Link to={`/userpage`}><div>Userpage</div></Link>
             
-            {/* <Link to={`/fieldpage`}><div>Fieldpage</div></Link>      */}
+            <Link to={`/fieldpage`}><div>Fieldpage</div></Link>     
             
           </header>
           {/* <h3>App.js page</h3>  */}
+
+          {/* if(userId ==null) ? <Homepage/> : <Userpage /> ; */}
 
           <Route exact path="/" render = {() => (
               <Homepage 
@@ -152,6 +183,7 @@ class App extends Component {
           <Route path="/userpage" render = {(routerProps) => (
               <Userpage
                 records={this.state.records}
+                userName={this.state.userProfile.name}
                 userId={this.state.userId}
                 fieldName={this.state.fieldName}
                 dateComplete={this.state.dateComplete}
@@ -159,6 +191,7 @@ class App extends Component {
                 details={this.state.details}
                 loginOnChange={this.loginOnChange}
                 createField={this.createField}
+                logout={this.logout}
                 {...routerProps} 
                 />
           )}/>
@@ -182,4 +215,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default withRouter(App);
