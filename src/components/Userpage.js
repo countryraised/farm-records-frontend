@@ -4,39 +4,39 @@ import {  Link } from 'react-router-dom';
 function Userpage(props) {
     
 
-    const records = props.records.map((record) => {
-        return (
-            <div key={record.id}>
-            <h4>{record.fieldName}</h4>            
-            </div>
-        );
-    });
+    // const records = props.records.map((record) => {
+    //     return (
+    //         <div key={record.id}>
+    //         <h4>{record.fieldName}</h4>            
+    //         </div>
+    //     );
+    // });
 
     const foundFields = (props.records.filter(field=> {
         return field.userId === props.userId 
         }) 
     );
-    const fields = [...new Set(records.map(rec => rec.category))];
+    const uniqueFields = [...new Set(foundFields.map(rec => rec.fieldName))];
 
-          
-    console.log(fields)
-    console.log(props.userId) //integer
-    console.log(foundFields) //array of objects.
-    console.log(props.userName)
+    
+    console.log(uniqueFields)
+    // console.log(props.userId) //integer
+    // console.log(foundFields) //array of objects.
+    // console.log(props.userName)
 
     return(
         <div>
             {/* <p>user page</p> */}
             <h2>Welcome {props.userName}</h2>
-            <button onclick={props.logout}>Log out</button><br/>
+            <button onClick={props.logout}>Log out</button><br/>
             {/* user's field list- be able to select field to see details*/}
             {/* <div>{records}</div>
             <p>split</p> */}
-            <div>{foundFields.map(field=> <div><Link to={`/fieldpage`} ><p key={field.id}>{field.fieldName}</p></Link></div>)}</div>
+            <div>{uniqueFields.map(field=> <div><Link to={`/fieldpage`} ><p key={field.id}>{field}</p></Link></div>)}</div>
             
             {/* add field */}
             <h4>Create a new field</h4>
-            <form onSubmit={props.createField}>
+            <form onSubmit={props.createField} >
                 <input
                     name='fieldName'
                     type='text'

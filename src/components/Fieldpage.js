@@ -3,25 +3,28 @@ import { Route, Link, Redirect } from 'react-router-dom';
 
 
 function Fieldpage(props) {
-    const records = props.records.map((record) => {
-        return (
-          <div key={record.id}>
-            <h4>{record.fieldName}</h4>          
-            <p>
-              {record.dateComplete}<br/>
-              {record.details}<br/>
-              {record.userId}
-            </p>
-          </div>
-        );
-    });
+    // const records = props.records.map((record) => {
+    //     return (
+    //       <div key={record.id}>
+    //         <h4>{record.fieldName}</h4>          
+    //         <p>
+    //           {record.dateComplete}<br/>
+    //           {record.details}<br/>
+    //           {record.userId}
+    //         </p>
+    //       </div>
+    //     );
+    // });
 
     const foundField = (props.records.find(field=> {
-        return field.userId == props.userId
+        return field.userId === props.userId 
+        // && field.fieldName == 
         })
     );   
+
     console.log(props.userId) //integer
     console.log(foundField) //array of objects.
+
     
 
     return(
@@ -31,7 +34,7 @@ function Fieldpage(props) {
             <h1> Field name</h1>
             {/* date, operation, and details of this field*/}
             {/* <div>{records}</div> */}
-            <p>split</p>
+            {/* <p>split</p> */}
             <h2>{foundField.fieldName}</h2>
             <div>{foundField.dateComplete}</div>
             <div>{foundField.operationType}</div>

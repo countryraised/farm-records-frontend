@@ -6,7 +6,7 @@ function Homepage(props) {
     
     return(
         <div>
-            <h1>Farm Records App</h1>
+            {/* <h1>Farm Records App</h1> */}
             {/* user login */}
             <h3>Log In</h3>
             <form onSubmit={props.login}>

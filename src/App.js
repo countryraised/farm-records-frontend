@@ -32,7 +32,7 @@ class App extends Component {
     // this.getUsers();
   };
   getRecords = async () => {
-    const response = await axios.get('http://localhost:3001/farmrecord/all');
+    const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://');
     // console.log(response);
     this.setState({
       records: response.data,
@@ -105,7 +105,7 @@ class App extends Component {
       userId: response.data.id, 
       loggedIn:true,
       userProfile: response.data,
-    })
+    })    
     this.props.history.push("/userpage")
     console.log("userpage")
     // this.getUser();
@@ -124,7 +124,11 @@ class App extends Component {
     const response = await axios.post('http://localhost:3001/farmrecord/createfield', data);
     console.log(response);    
     console.log("field added");
+    this.getRecords();
+    
+    // this.props.history.push("/fieldpage")
   }
+
 
   logout =(e)=>{
     e.preventDefault();
@@ -154,7 +158,7 @@ class App extends Component {
             <Link to={`/userpage`}><div>Userpage</div></Link>
             
             <Link to={`/fieldpage`}><div>Fieldpage</div></Link>     
-            
+            <h1>Farm Records App</h1>
           </header>
           {/* <h3>App.js page</h3>  */}
 
