@@ -23,9 +23,11 @@ class App extends Component {
       dateComplete:'',
       operationType:'',
       details:'',
+      apiDataLoaded: false,
       
     };
   }
+
 
   componentDidMount = () => {
     this.getRecords();
@@ -34,15 +36,16 @@ class App extends Component {
     const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://');    
     this.setState({
       records: response.data,
+      apiDataLoaded: true
     });
   };
-  getUsers = async () => {
-    console.log("get users")
-    const response = await axios.get('http://localhost:3001/user/all');
-    this.setState({
-      allUsers: response.data,
-    });
-  };
+  // getUsers = async () => {
+  //   console.log("get users")
+  //   const response = await axios.get('http://localhost:3001/user/all');
+  //   this.setState({
+  //     allUsers: response.data,
+  //   });
+  // };
 
   getUser = async () => {
     console.log("get users")
@@ -131,11 +134,11 @@ class App extends Component {
       return (
         <div className="App">
           <header>
-            <Link to={`/`}><div>Home</div></Link>
-            <Link to={`/userpage`}><div>Userpage</div></Link>
+            {/* <Link to={`/`}><div>Home</div></Link> */}
+            {/* <Link to={`/userpage`}><div>Userpage</div></Link> */}
             
-            <Link to={`/fieldpage`}><div>Fieldpage</div></Link>     
-            <h1>Farm Records App</h1>
+            {/* <Link to={`/fieldpage`}><div>Fieldpage</div></Link> */}
+            <Link to={`/`}><h1>Farm Records App</h1></Link>
           </header>          
 
           <Route exact path="/" render = {() => (

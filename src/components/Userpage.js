@@ -7,22 +7,20 @@ function Userpage(props) {
         return field.userId === props.userId 
         }) 
     );
-    const uniqueFields = [...new Set(foundFields.map(rec => rec.fieldName))];
-
+    const uniqueFields = [...new Set(foundFields.map(rec => rec.fieldName))];   
     
-    console.log(uniqueFields)
-    // console.log(props.userId) //integer
-    // console.log(foundFields) //array of objects.
-    // console.log(props.userName)
-
     return(
         <div>            
             <h2>Welcome {props.userName}</h2>
-            <button onClick={props.logout}>Log out</button><br/>
-            
-            <div>{uniqueFields.map(field=> <div><Link to={`/fieldpage`} ><p key={field}>{field}</p></Link></div>)}</div>            
-            
-            <h4>Create a new field</h4>
+            <button onClick={props.logout} class="btn btn-warning">Log out</button><br/>
+        
+
+            <div>
+                <h5>Your existing fields</h5>
+                <div>{uniqueFields.map(field=> <div><h6>{field}</h6></div>)}</div>            
+            </div>
+            <div><Link to='/fieldpage'><p>past field operations.</p> </Link></div>
+            <h4>Create a new field event.</h4>
             <form onSubmit={props.createField} >
                 <input
                     name='fieldName'
@@ -58,9 +56,9 @@ function Userpage(props) {
                     value={props.userId}
                     onChange={props.loginOnChange}
                 />
-                <input type='submit' value='Create' />
+                <input type='submit' value='Create' class="btn btn-success" />
 
-            </form>            
+            </form>    <br/>                    
 
         </div>
     )

@@ -5,8 +5,7 @@ import { Route, Link, Redirect } from 'react-router-dom';
 function Fieldpage(props) {
     
     const foundFields = (props.records.filter(field=> {
-        return field.userId === props.userId 
-        && field.fieldName == props.fieldName
+        return field.userId === props.userId         
         })
     );   
 
@@ -16,8 +15,8 @@ function Fieldpage(props) {
     return(
         <div>
             <Link to={`/userpage`}><div>Userpage</div></Link>
-            <h4>fieldpage.js</h4>
-            <h1> Field name</h1>
+            {/* <h4>fieldpage.js</h4> */}
+            <h1>Your completed field operations</h1>
             
             <div>
                 {foundFields.map(field => 

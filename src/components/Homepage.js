@@ -6,29 +6,31 @@ function Homepage(props) {
     
     return(
         <div>
-            {/* <h1>Farm Records App</h1> */}
-            {/* user login */}
+            
             <h3>Log In</h3>
-            <form onSubmit={props.login}>
-                <input
-                    name='username'
-                    type='text'
-                    placeholder='username'
-                    value={props.username}
-                    onChange={props.loginOnChange}
-                />
-                <input
-                    name='password'
-                    type='password'
-                    placeholder='password'
-                    value={props.password}
-                    onChange={props.loginOnChange}
-                />
-                <input type='submit' value='Login' />
-                {/* <Link to={`/userpage`} ><input type='submit' value='Login' /></Link> */}
+            <form onSubmit={props.login} >
+                <div>
+                    <input
+                        name='username'
+                        type='text'
+                        placeholder='username'
+                        value={props.username}
+                        onChange={props.loginOnChange}
+                    />
+                    <input
+                        name='password'
+                        type='password'
+                        placeholder='password'
+                        value={props.password}
+                        onChange={props.loginOnChange}
+                    />
+                    <input type='submit' value='Login' />
+
+                </div>
             </form><br/>
+
                 <h4>OR</h4>
-            {/* user sign up */}
+            
             <h3>Sign Up</h3>
             <br/>
             <form onSubmit={props.signup}>
@@ -51,7 +53,7 @@ function Homepage(props) {
                     type='password'
                     placeholder='password'
                     value={props.password}
-                    onChange={props.loginOnChange}
+                    onChange={props.loginOnChange} 
                 />
                 <input type='submit' value='SignUp' />
                 {/* <Link to={`/useerpage`} ><input type='submit' value='SignUp' /></Link> */}
