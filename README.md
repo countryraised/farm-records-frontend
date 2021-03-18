@@ -55,6 +55,8 @@ Spent a lot of time attempting to authentication and encryption working.
 ![ERD](./images/auth401.png)
  In the end too much time and effort was spent on it and it was abandoned. I would prefer to have it working but should have saved that until later in the project.
 
+ The ability to add maps turned into a much more intensive job than I anticipated and time researching that.
+
  
 ### Additional Comments
 
