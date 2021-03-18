@@ -1,16 +1,7 @@
 import React from 'react';
 import {  Link } from 'react-router-dom';
 
-function Userpage(props) {
-    
-
-    // const records = props.records.map((record) => {
-    //     return (
-    //         <div key={record.id}>
-    //         <h4>{record.fieldName}</h4>            
-    //         </div>
-    //     );
-    // });
+function Userpage(props) {    
 
     const foundFields = (props.records.filter(field=> {
         return field.userId === props.userId 
@@ -25,16 +16,12 @@ function Userpage(props) {
     // console.log(props.userName)
 
     return(
-        <div>
-            {/* <p>user page</p> */}
+        <div>            
             <h2>Welcome {props.userName}</h2>
             <button onClick={props.logout}>Log out</button><br/>
-            {/* user's field list- be able to select field to see details*/}
-            {/* <div>{records}</div>
-            <p>split</p> */}
-            <div>{uniqueFields.map(field=> <div><Link to={`/fieldpage`} ><p key={field.id}>{field}</p></Link></div>)}</div>
             
-            {/* add field */}
+            <div>{uniqueFields.map(field=> <div><Link to={`/fieldpage`} ><p key={field}>{field}</p></Link></div>)}</div>            
+            
             <h4>Create a new field</h4>
             <form onSubmit={props.createField} >
                 <input

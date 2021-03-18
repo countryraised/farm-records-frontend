@@ -29,30 +29,24 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getRecords();
-    // this.getUsers();
   };
   getRecords = async () => {
-    const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://');
-    // console.log(response);
+    const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://');    
     this.setState({
       records: response.data,
     });
-    // console.log(this.state.records);
   };
   getUsers = async () => {
     console.log("get users")
     const response = await axios.get('http://localhost:3001/user/all');
-    console.log(response);
     this.setState({
       allUsers: response.data,
     });
-    console.log(this.state.allUsers);
   };
 
   getUser = async () => {
     console.log("get users")
     const response = await axios.get(`http://localhost:3001/user/profile/${this.state.userId}`);
-    console.log(response);
     this.setState({
       userProfile: response.data,
     });
@@ -72,48 +66,35 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    console.log("i am running")
     const response = await axios.post('http://localhost:3001/user/login', data);
-    console.log("logged in"); 
-    console.log(response.data)
     this.setState({
       userId: response.data.id, 
       loggedIn:true,
       userProfile: response.data,
     })
-    console.log(this.state.userId)
-    console.log(this.state.userProfile) 
-    this.props.history.push("/userpage")   
-    // this.getUser();  
-    console.log("userpage")  
-    // this.props.history.push("/userpage")
+    // console.log(this.state.userId)
+    // console.log(this.state.userProfile) 
+    this.props.history.push("/userpage")  
   };
 
   signup = async (e) => {
     e.preventDefault();
-    console.log("signup")
     const data = {       
       name: this.state.name,
       username: this.state.username,
       password: this.state.password,
-    };
-    console.log("i am running")
-    const response = await axios.post('http://localhost:3001/user/signup', data);
-    console.log(response);    
-    console.log("signed up");
+    };    
+    const response = await axios.post('http://localhost:3001/user/signup', data);    
     this.setState({
       userId: response.data.id, 
       loggedIn:true,
       userProfile: response.data,
     })    
-    this.props.history.push("/userpage")
-    console.log("userpage")
-    // this.getUser();
+    this.props.history.push("/userpage")    
   };
 
   createField = async (e) => {
     e.preventDefault();
-    console.log("newField")
     const data = {
       userId: this.state.userId,
       fieldName: this.state.fieldName,
@@ -122,11 +103,7 @@ class App extends Component {
       details: this.state.details,
     };
     const response = await axios.post('http://localhost:3001/farmrecord/createfield', data);
-    console.log(response);    
-    console.log("field added");
-    this.getRecords();
-    
-    // this.props.history.push("/fieldpage")
+    this.props.history.push("/fieldpage")
   }
 
 
@@ -159,10 +136,7 @@ class App extends Component {
             
             <Link to={`/fieldpage`}><div>Fieldpage</div></Link>     
             <h1>Farm Records App</h1>
-          </header>
-          {/* <h3>App.js page</h3>  */}
-
-          {/* if(userId ==null) ? <Homepage/> : <Userpage /> ; */}
+          </header>          
 
           <Route exact path="/" render = {() => (
               <Homepage 
@@ -171,18 +145,7 @@ class App extends Component {
                 signup={this.signup}
                 allUsers={this.state.allUsers}
                 />
-          )}/>          
-
-          {/* <Userpage
-            records={this.state.records}
-            userId={this.state.userId}
-            fieldName={this.state.fieldName}
-            dateComplete={this.state.dateComplete}
-            operationType={this.state.operationType}
-            details={this.state.details}
-            loginOnChange={this.loginOnChange}
-            createField={this.createField}
-            /> */}
+          )}/>           
 
           <Route path="/userpage" render = {(routerProps) => (
               <Userpage
@@ -206,12 +169,7 @@ class App extends Component {
                 userId={this.state.userId} 
                 {...routerProps} 
                 />
-          )}/>
-
-          {/* <Fieldpage
-            records={this.state.records}
-            userProfile={this.state.userId}
-            /> */}                   
+          )}/>               
 
         </div>
       );    
