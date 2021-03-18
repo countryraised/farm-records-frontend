@@ -8,19 +8,17 @@ function Fieldpage(props) {
         return field.userId === props.userId         
         })
     );   
-
-    // console.log(props.userId) //integer
-    // console.log(foundField) //array of objects.    
+    foundFields.sort((a, b) => (b.id - a.id))
 
     return(
         <div>
-            <Link to={`/userpage`}><div>Userpage</div></Link>
-            {/* <h4>fieldpage.js</h4> */}
+            <Link to={`/userpage`}><button class="btn-lg">Return to Userpage</button></Link>
+            
             <h1>Your completed field operations</h1>
             
-            <div>
+            <div >
                 {foundFields.map(field => 
-                <div>
+                <div key={field.id}>
                     <h2>{field.fieldName}</h2>
                     <div>{field.dateComplete}</div>
                     <div>{field.operationType}</div>

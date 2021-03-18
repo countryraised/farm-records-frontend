@@ -19,7 +19,7 @@ function Userpage(props) {
                 <h5>Your existing fields</h5>
                 <div>{uniqueFields.map(field=> <div><h6>{field}</h6></div>)}</div>            
             </div>
-            <div><Link to='/fieldpage'><p>past field operations.</p> </Link></div>
+            <div><Link to='/fieldpage'><button class="btn-lg">past field operations.</button> </Link></div>
             <h4>Create a new field event.</h4>
             <form onSubmit={props.createField} >
                 <input
