@@ -11,7 +11,7 @@ This is a project to work on Model View Controllers and GitHub collaboration. We
 [Here is the published project.](http://farm-record-app.surge.sh)
 
 #### Entity Relationship Diagram
-
+![ERD](./images/ERD-project5.jpg)
 
 ### Current Features
 * Home page
@@ -29,6 +29,7 @@ This is a project to work on Model View Controllers and GitHub collaboration. We
 ### Planned Features
 * Button to remove field event
 * Edit event
+* Individual field maps
 
 
 
