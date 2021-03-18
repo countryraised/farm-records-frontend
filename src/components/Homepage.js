@@ -56,7 +56,7 @@ function Homepage(props) {
                     onChange={props.loginOnChange} 
                 />
                 <input type='submit' value='SignUp' />
-                {/* <Link to={`/useerpage`} ><input type='submit' value='SignUp' /></Link> */}
+                
             </form><br/><br/>
             
         </div>

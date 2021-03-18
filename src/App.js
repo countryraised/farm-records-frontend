@@ -27,29 +27,23 @@ class App extends Component {
       
     };
   }
-
+  
 
   componentDidMount = () => {
     this.getRecords();
   };
   getRecords = async () => {
-    const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://');    
+    const response = await axios.get('http://localhost:3001/farmrecord/all' || 'https://farm-record-app.herokuapp.com/farmrecord/all');    
     this.setState({
       records: response.data,
       apiDataLoaded: true
     });
   };
-  // getUsers = async () => {
-  //   console.log("get users")
-  //   const response = await axios.get('http://localhost:3001/user/all');
-  //   this.setState({
-  //     allUsers: response.data,
-  //   });
-  // };
+  
 
   getUser = async () => {
     console.log("get users")
-    const response = await axios.get(`http://localhost:3001/user/profile/${this.state.userId}`);
+    const response = await axios.get(`http://localhost:3001/user/profile/${this.state.userId}` || `https://farm-record-app.herokuapp.com/user/profile/${this.state.userId}`);
     this.setState({
       userProfile: response.data,
     });
@@ -69,14 +63,12 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password,
     };
-    const response = await axios.post('http://localhost:3001/user/login', data);
+    const response = await axios.post('http://localhost:3001/user/login', data  || 'https://farm-record-app.herokuapp.com/user/login');
     this.setState({
       userId: response.data.id, 
       loggedIn:true,
       userProfile: response.data,
-    })
-    // console.log(this.state.userId)
-    // console.log(this.state.userProfile) 
+    })     
     this.props.history.push("/userpage")  
   };
 
@@ -87,7 +79,7 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password,
     };    
-    const response = await axios.post('http://localhost:3001/user/signup', data);    
+    const response = await axios.post('http://localhost:3001/user/signup', data || 'https://farm-record-app.herokuapp.com/user/signup');    
     this.setState({
       userId: response.data.id, 
       loggedIn:true,
@@ -105,7 +97,7 @@ class App extends Component {
       operationType: this.state.operationType,
       details: this.state.details,
     };
-    const response = await axios.post('http://localhost:3001/farmrecord/createfield', data);
+    const response = await axios.post('http://localhost:3001/farmrecord/createfield', data  || 'https://farm-record-app.herokuapp.com/farmrecord/createfield');
     this.props.history.push("/fieldpage")
   }
 
@@ -134,10 +126,7 @@ class App extends Component {
       return (
         <div className="App">
           <header>
-            {/* <Link to={`/`}><div>Home</div></Link> */}
-            {/* <Link to={`/userpage`}><div>Userpage</div></Link> */}
             
-            {/* <Link to={`/fieldpage`}><div>Fieldpage</div></Link> */}
             <Link to={`/`}><h1>Farm Records App</h1></Link>
           </header>          
 
